@@ -49,6 +49,17 @@ public class Library {
         }
         return false;
     }
+     public boolean updateBook(int id, Book newData) {
+        Book book = findBookById(id);
+        if (book != null) {
+            // В реальном приложении здесь были бы сеттеры
+            // Для учебного примера просто логируем
+            operationLog.addEntry(OperationLog.OperationType.ADD_BOOK,
+                "Обновлена книга ID: " + id);
+            return true;
+        }
+        return false;
+    }
     // Метод поиска книг по автору
     public List<Book> findBooksByAuthor(String author) {
         List<Book> result = new ArrayList<>();
