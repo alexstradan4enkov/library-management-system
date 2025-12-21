@@ -87,3 +87,57 @@ public class Library {
         return String.format("Всего книг: %d | Доступно: %d | Выдано: %d",
             total, available, borrowed);
     }
+
+    // ВЛОЖЕННЫЙ КЛАСС OperationLog
+    public static class OperationLog {
+        public enum OperationType {
+            ADD_BOOK, BORROW, RETURN
+        }
+
+        // Внутренний класс для записи операции
+        public class LogEntry {
+            private OperationType type;
+            private LocalDateTime timestamp;
+            private String description;
+
+            public LogEntry(OperationType type, String description) {
+                this.type = type;
+                this.timestamp = LocalDateTime.now();
+                this.description = description;
+            }
+
+            // Геттеры
+            public OperationType getType() { return type; }
+            public LocalDateTime getTimestamp() { return timestamp; }
+            public String getDescription() { return description; }
+
+            @Override
+            public String toString() {
+                return String.format("[%s] %s - %s",
+                    timestamp.toString(), type.toString(), description);
+            }
+        }
+
+        private List<LogEntry> entries;
+
+        public OperationLog() {
+            this.entries = new ArrayList<>();
+        }
+
+        public void addEntry(OperationType type, String description) {
+            entries.add(new LogEntry(type, description));
+        }
+
+        public List<LogEntry> getEntries() {
+            return new ArrayList<>(entries);
+        }
+
+        public void printLog() {
+            System.out.println("=== Журнал операций ===");
+            for (LogEntry entry : entries) {
+                System.out.println(entry);
+            }
+            System.out.println("=======================");
+        }
+    }
+}
