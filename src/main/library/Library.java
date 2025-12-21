@@ -38,7 +38,17 @@ public class Library {
         return String.format("Всего книг: %d | Доступно: %d | Выдано: %d",
             total, available, borrowed);
     }
-
+     public boolean removeBook(int id) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getId() == id) {
+                Book removed = books.remove(i);
+                operationLog.addEntry(OperationLog.OperationType.ADD_BOOK,
+                    "Удалена книга: " + removed.getTitle());
+                return true;
+            }
+        }
+        return false;
+    }
     // Метод поиска книг по автору
     public List<Book> findBooksByAuthor(String author) {
         List<Book> result = new ArrayList<>();
