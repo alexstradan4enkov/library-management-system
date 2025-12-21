@@ -30,6 +30,14 @@ public class Library {
         }
         return null;
     }
+    public String getStatistics() {
+        int total = books.size();
+        int available = getAvailableBooks().size();
+        int borrowed = total - available;
+        
+        return String.format("Всего книг: %d | Доступно: %d | Выдано: %d",
+            total, available, borrowed);
+    }
 
     // Метод поиска книг по автору
     public List<Book> findBooksByAuthor(String author) {
