@@ -1,13 +1,15 @@
 package library;
+
 public class Book {
+
     private int id;
-    private string title;
-    private string author;
+    private String title;
+    private String author;
     private int year;
-    private string isbn;
+    private String isbn;
     private boolean available;
 
-    public Book(int id, string title, string author, int year, string isbn) {
+    public Book(int id, String title, String author, int year, String isbn) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -16,22 +18,39 @@ public class Book {
         this.available = true;
     }
 
-    // геттеры
-    public int getId() { return id; }
-    public string getTitle() { return title; }
-    public string getAuthor() { return author; }
-    public int getYear() { return year; }
-    public string getIsbn() { return isbn; }
-    public boolean isAvailable() { return available; }
+    public int getId() {
+        return id;
+    }
 
-    // сеттер
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
     public void setAvailable(boolean available) {
         this.available = available;
     }
 
     @Override
-    public string toString() {
-        return String.format("[ID: %d] \"%s\" — %s (%d)\nISBN: %s | Статус: %s",
-                id, title, author, year, isbn, available ? "доступна" : "выдана");
+    public String toString() {
+        String status = available ? "доступна" : "выдана";
+        return "[ID: " + id + "] \"" + title + "\" — " + author + " (" + year + ")\n"
+                + "ISBN: " + isbn + " | статус: " + status;
     }
 }
+
