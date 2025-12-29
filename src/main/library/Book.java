@@ -1,62 +1,37 @@
 package library;
-
-// Модель книги
 public class Book {
+    private int id;
+    private string title;
+    private string author;
+    private int year;
+    private string isbn;
+    private boolean available;
 
-    // Поля
-    private int bookId;
-    private String name;
-    private String writer;
-    private int publishYear;
-    private String isbnCode;
-    private boolean inStock;
-
-    // Конструктор
-    public Book(int bookId, String name, String writer, int publishYear, String isbnCode) {
-        this.bookId = bookId;
-        this.name = name;
-        this.writer = writer;
-        this.publishYear = publishYear;
-        this.isbnCode = isbnCode;
-        this.inStock = true;
+    public Book(int id, string title, string author, int year, string isbn) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.isbn = isbn;
+        this.available = true;
     }
 
-    // Геттеры
-    public int getBookId() {
-        return bookId;
-    }
+    // геттеры
+    public int getId() { return id; }
+    public string getTitle() { return title; }
+    public string getAuthor() { return author; }
+    public int getYear() { return year; }
+    public string getIsbn() { return isbn; }
+    public boolean isAvailable() { return available; }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getWriter() {
-        return writer;
-    }
-
-    public int getPublishYear() {
-        return publishYear;
-    }
-
-    public String getIsbnCode() {
-        return isbnCode;
-    }
-
-    public boolean isInStock() {
-        return inStock;
-    }
-
-    // Сеттер для статуса наличия
-    public void setInStock(boolean inStock) {
-        this.inStock = inStock;
+    // сеттер
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Override
-    public String toString() {
-        String statusText = inStock ? "В наличии" : "Выдана";
-        return String.format(
-                "Книга #%d: \"%s\" (%d)\nАвтор: %s\nISBN: %s\nСтатус: %s",
-                bookId, name, publishYear, writer, isbnCode, statusText
-        );
+    public string toString() {
+        return String.format("[ID: %d] \"%s\" — %s (%d)\nISBN: %s | Статус: %s",
+                id, title, author, year, isbn, available ? "доступна" : "выдана");
     }
 }
