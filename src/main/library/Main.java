@@ -1,5 +1,7 @@
 package library;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Library library = new Library();
@@ -12,39 +14,48 @@ public class Main {
         library.addBook(new Book(3, "Анна Каренина",
                 "Л.Н. Толстой", 1877, "978-5-17-090337-6"));
 
-        // Демонстрация всех методов
-
-        System.out.println("=== Демонстрация работы библиотеки ===\n");
-
-        // 1. Поиск книг по автору
-        System.out.println("1. Книги Л.Н. Толстого:");
-        for (Book book : library.findBooksByAuthor("Л.Н. Толстой")) {
-            System.out.println("   " + book);
+        //поиск по ID
+        System.out.println("поиск книги с ID = 2:");
+        Book bookById = library.findBookById(2);
+        if (bookById != null) {
+            System.out.println(bookById);
+        } else {
+            System.out.println("книга не найдена.");
         }
 
-        // 2. Выдача книги
-        System.out.println("\n2. Выдаем книгу с ID=1:");
-        library.borrowBook(1);
-        System.out.println("   После выдачи: " + library.findBookById(1));
-
-        // 3. Доступные книги
-        System.out.println("\n3. Доступные книги сейчас:");
-        for (Book book : library.getAvailableBooks()) {
-            System.out.println("   " + book.getTitle());
+        //поиск по автору
+        System.out.println("\nкниги автора Л.Н. Толстой:");
+        List<Book> tolstoyBooks = library.findBooksByAuthor("Л.Н. Толстой");
+        for (Book b : tolstoyBooks) {
+            System.out.println(b);
+            System.out.println();
         }
 
-        // 4. Возврат книги
-        System.out.println("\n4. Возвращаем книгу с ID=1:");
-        library.returnBook(1);
-        System.out.println("   После возврата: " + library.findBookById(1));
+        //выдача книги
+        System.out.println("выдача книги с ID = 1:");
+        boolean borrowed = library.borrowBook(1);
+        System.out.println("результат выдачи: " + borrowed);
 
-        // 5. Статистика
-        System.out.println("\n5. Статистика библиотеки:");
-        System.out.println("   " + library.getStatistics());
+        //попытка выдать ту же книгу ещё раз
+        System.out.println("повторная выдача той же книги:");
+        boolean borrowedAgain = library.borrowBook(1);
+        System.out.println("результат повторной выдачи: " + borrowedAgain);
 
-        // 6. Журнал всех операций
-        System.out.prirationLog();
+        //возврат книги
+        System.out.println("возврат книги с ID = 1:");
+        boolean returned = library.returnBook(1);
+        System.out.println("результат возврата: " + returned);
 
-        System.out.println("\n=== Демонстрация завершена ===");
+        //список доступных книг
+        System.out.println("\nдоступные книги:");
+        List<Book> availableBooks = library.getAvailableBooks();
+        for (Book b : availableBooks) {
+            System.out.println(b);
+            System.out.println();
+        }
+
+        //вывод журнала операций
+        System.out.println("журнал операций:");
+        library.printOperationLog();
     }
 }
